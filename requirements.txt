@@ -1,0 +1,6 @@
+pygooglechart
+selenium 
+webdriver-manager
+playwright
+# playwright install chromium
+# playwright install-deps chromium
