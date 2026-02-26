@@ -1,4 +1,4 @@
-import pievis
+import src.pievis.pievis as pievis
 import pandas as pd
 
 if __name__ == "__main__":
