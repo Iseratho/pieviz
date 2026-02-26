@@ -3,7 +3,7 @@ import time
 import os
 import pandas as pd
 
-def create_3d_pie_google(data_dict, title=""):
+def create_3d_pie_google(data_dict, title="", font_size=36):
     # Convert dictionary to Google's data format: [['Label', 'Value'], ...]
     rows = [["Label", "Value"]]
     for k, v in data_dict.items():
@@ -22,6 +22,7 @@ def create_3d_pie_google(data_dict, title=""):
             var options = {{
               title: '{title}',
               is3D: true,
+              fontSize: {font_size},               // larger default font
               pieSliceText: 'label',     // Forces TEXT labels inside
               legend: 'none',            // Cleaner look without side legend
               backgroundColor: 'transparent',
@@ -63,30 +64,12 @@ def save_google_chart_as_png(html_file, output_png):
         page.locator('#pie_3d_render').screenshot(path=output_png)
         print(f"Chart saved as {output_png}")
 
-if __name__ == "__main__":
-    df = pd.read_csv("pie_chart_trend.csv", index_col=0)
-    # title = df.index[0]
-    # data = df.iloc[0].to_dict()  # Specific row by index
-    # print(title, data)
+def create_all_charts_from_csv(csv_file, prefix=""):
+    df = pd.read_csv(csv_file, index_col=0)
 
-    # 
     for index, row in df.iterrows():
-        title = f"GTrends in {index}"
+        title = f"{prefix}{index}"
         data = row.to_dict()
         print(title, data)
         create_3d_pie_google(data, title=title)
         save_google_chart_as_png("temp_chart.html", f"pie/pie_{index}.png")
-    # Data
-    # data = {
-    #     "Pie Chart": 55,
-    #     "Venn Diagram": 37,
-    #     "Upset Plot": 1
-    # }
-
-    # # Render
-    # create_3d_pie_google(data, title="2025 Pie Chart Usage")
-
-    # # Usage (assuming you ran the previous script to create 'temp_chart.html')
-    # save_google_chart_as_png("temp_chart.html", "my_3d_pie.png")
-    # # Clean up temporary file
-    # os.remove("temp_chart.html")

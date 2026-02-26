@@ -6,11 +6,12 @@
           google.charts.load("current", {packages:["corechart"]});
           google.charts.setOnLoadCallback(drawChart);
           function drawChart() {
-            var data = google.visualization.arrayToDataTable([['Label', 'Value'], ['Pie Chart', 55], ['Venn Diagram', 37], ['Upset Plot', 1]]);
+            var data = google.visualization.arrayToDataTable([['Label', 'Value'], ['apple pie', 750], ['other food', 100250]]);
 
             var options = {
-              title: 'GTrends in 2025',
+              title: '',
               is3D: true,
+              fontSize: 36,               // larger default font
               pieSliceText: 'label',     // Forces TEXT labels inside
               legend: 'none',            // Cleaner look without side legend
               backgroundColor: 'transparent',
