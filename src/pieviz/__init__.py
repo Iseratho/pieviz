@@ -1,4 +1,4 @@
-from .pievis import *
+from .pieviz import *
 
 __all__ = [
     'create_3d_pie_google',
