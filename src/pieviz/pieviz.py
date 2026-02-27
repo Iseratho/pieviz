@@ -28,7 +28,7 @@ def create_3d_pie_google(data_dict, title="", font_size=36):
               backgroundColor: 'transparent',
               chartArea: {{left:20, top:20, width:'90%', height:'90%'}},
               // Use standard colors
-              colors: ['#3366cc', '#dc3912', '#ff9900', '#109618', '#990099']
+              colors: ['#3366cc', '#dc3912', '#ff9900', '#109618']
             }};
 
             var chart = new google.visualization.PieChart(document.getElementById('pie_3d_render'));
@@ -63,6 +63,10 @@ def save_google_chart_as_png(html_file, output_png):
         
         page.locator('#pie_3d_render').screenshot(path=output_png)
         print(f"Chart saved as {output_png}")
+
+def create_all_charts_from_dict(title, data_dict):
+    create_3d_pie_google(data_dict, title=title)
+    save_google_chart_as_png("temp_chart.html", f"pie/{title}.png")
 
 def create_all_charts_from_csv(csv_file, prefix=""):
     df = pd.read_csv(csv_file, index_col=0)
