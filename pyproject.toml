@@ -18,8 +18,19 @@ classifiers = [
 ]
 license = "MIT"
 license-files = ["LICENSE"]
+dependencies = [
+    "pandas>=2.3.3",
+    "plotly>=5.0.0",
+    "kaleido>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0.0"]
 
 [project.urls]
 Homepage = "https://github.com/Iseratho/pieviz"
 Issues = "https://github.com/Iseratho/pieviz/issues"
 # Documentation = "https://pieviz.readthedocs.io/"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
