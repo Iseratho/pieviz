@@ -40,5 +40,9 @@ if __name__ == "__main__":
     # 5+ After superiority of pie charts
     pieviz.create_all_charts_from_dict("author_contribution", {"Markus": 50, "Kevin": 50})
 
+    # Appendix
+    pieviz.create_all_charts_from_dict("pielike", {"Like": 15, "♥": 1})
+    pieviz.create_all_charts_from_dict("piecompliment", {"Compliment": 3, "Stoic": 13})
+
     # Delete the temporary HTML file
     os.remove("temp_chart.html")
