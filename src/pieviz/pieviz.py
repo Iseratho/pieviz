@@ -1,3 +1,5 @@
+import re
+
 import numpy as np
 from typing import Dict, Union
 
@@ -197,8 +199,9 @@ def bake_pie(
     height: float = 0.3,
     font_size: int = 36,
     label_with_percent: bool = False,
+    small_slice_labels_outside: bool = False,
     projection_type: str = "orthographic",
-    colors: list[str] = px.colors.qualitative.Plotly,
+    colors: list[str] = ['#3366cc', '#dc3912', '#ff9900', '#109618']
 ) -> go.Figure:
     """
     Create a true 3D pie chart using Mesh3d triangulation.
@@ -213,6 +216,11 @@ def bake_pie(
     """
     labels = list(data_dict.keys())
     values = np.array(list(data_dict.values()), dtype=float)
+
+    # exclude empty slices (0 or negative values)
+    valid_indices = values > 0
+    labels = [label for label, valid in zip(labels, valid_indices) if valid]
+    values = values[valid_indices]
 
     # Normalize values to angles
     total = values.sum()
@@ -256,7 +264,6 @@ def bake_pie(
         showarrow = False
         ax = 0
         ay = 0
-        font = dict(size=font_size, color="white")
         if is_single_slice:
             annotation_x = 0.0
             annotation_y = 0.0
@@ -265,7 +272,7 @@ def bake_pie(
             ay = 0
         elif (
             end_angle - start_angle < np.pi / 50
-        ):  # if slice is too small, put annotation outside
+        ) and small_slice_labels_outside:  # if slice is too small, put annotation outside
             showarrow = True
             annotation_x = radius * 1.0 * np.cos((start_angle + end_angle) / 2)
             annotation_y = radius * 1.0 * np.sin((start_angle + end_angle) / 2)
@@ -274,8 +281,20 @@ def bake_pie(
             font = dict(size=font_size, color="black")
         else:
             showarrow = False
-            annotation_x = radius * 0.75 * np.cos((start_angle + end_angle) / 2)
-            annotation_y = radius * 0.75 * np.sin((start_angle + end_angle) / 2)
+            if i % 2 == 0:
+                annotation_x = radius * 0.7 * np.cos((start_angle + end_angle) / 2)
+                annotation_y = radius * 0.7 * np.sin((start_angle + end_angle) / 2)
+            else:
+                annotation_x = radius * 0.35 * np.cos((start_angle + end_angle) / 2)
+                annotation_y = radius * 0.35 * np.sin((start_angle + end_angle) / 2)
+        font = dict(size=font_size, color="white")
+        if end_angle - start_angle < np.pi / 10:
+            angle_size = (end_angle - start_angle)
+            font = dict(size=max(font_size * angle_size / (np.pi / 10), 10), color="white")
+
+        if "pie" in label.lower():
+            # lower or upper case
+            label = re.sub(r"(?i)pie", "🥧", label).strip()
 
         annotations.append(
             dict(
