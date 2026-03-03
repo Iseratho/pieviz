@@ -21,7 +21,7 @@ def bake_all_pies_from_csv(csv_file: str, prefix: str = "") -> None:
         data = row.to_dict()
         print(title, data)
         fig = bake_pie(data)
-        store_pie(fig, f"pie/pie_{index}.png", format="png")
+        store_pie(fig, f"{prefix}{index}.png", format="png")
 
 
 def bake_and_store_pie(
