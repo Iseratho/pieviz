@@ -30,7 +30,7 @@ if __name__ == "__main__":
     ## 4.1 Benchmarking
     pieviz.bake_and_store_pie({"apple pie": 750, "other food": 100250}, folder+"/pie7_food101.png")
     ## 4.2 Case study: GEB
-    pieviz.bake_all_pies_from_csv("data/geb_analysis.csv", prefix=folder+"/pie7_")
+    pieviz.bake_all_pies_from_csv("data/geb_analysis.csv", prefix=folder+"/pie8_")
     ## 4.3 Recursive paper analysis
     pieviz.bake_and_store_pie({"blue": 69, "red": 42, "orange": 19, "green":9}, folder+"/pie9_paper_analysis.png")
 
