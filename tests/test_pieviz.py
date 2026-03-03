@@ -95,9 +95,9 @@ class TestPie(unittest.TestCase):
             mock.patch("pieviz.pieviz.bake_pie", return_value=fake_fig) as bake,
             mock.patch("pieviz.pieviz.store_pie") as store,
         ):
-            pieviz.bake_and_store_pie("My title", {"A": 1}, "output.html", font_size=22)
+            pieviz.bake_and_store_pie({"A": 1}, "output.html", font_size=22)
 
-        bake.assert_called_once_with({"A": 1}, title="My title", font_size=22)
+        bake.assert_called_once_with({"A": 1}, font_size=22)
         store.assert_called_once_with(fake_fig, "output.html")
 
     def test_bake_all_pies_from_csv_calls_bake_and_store_for_each_row(self):
@@ -114,8 +114,8 @@ class TestPie(unittest.TestCase):
                 pieviz.bake_all_pies_from_csv(csv_path, prefix="PRE-")
 
         assert bake.call_count == 2
-        bake.assert_any_call({"a": 1, "b": 2}, title="PRE-row1")
-        bake.assert_any_call({"a": 3, "b": 4}, title="PRE-row2")
+        bake.assert_any_call({"a": 1, "b": 2})
+        bake.assert_any_call({"a": 3, "b": 4})
         store.assert_any_call("fig", "pie/pie_row1.png", format="png")
         store.assert_any_call("fig", "pie/pie_row2.png", format="png")
 

@@ -5,7 +5,6 @@ from typing import Dict, Union
 
 import pandas as pd
 import plotly.graph_objects as go
-import plotly.express as px
 import plotly.io
 
 
@@ -21,17 +20,16 @@ def bake_all_pies_from_csv(csv_file: str, prefix: str = "") -> None:
         title = f"{prefix}{index}"
         data = row.to_dict()
         print(title, data)
-        fig = bake_pie(data, title=title)
+        fig = bake_pie(data)
         store_pie(fig, f"pie/pie_{index}.png", format="png")
 
 
 def bake_and_store_pie(
-    title: str,
     data_dict: Dict[str, Union[int, float]],
     output_file: str,
-    font_size: int = 36,
+    font_size: int = 42,
 ) -> None:
-    fig = bake_pie(data_dict, title=title, font_size=font_size)
+    fig = bake_pie(data_dict, font_size=font_size)
     store_pie(fig, output_file)
 
 
@@ -194,10 +192,9 @@ def _create_pie_slices_mesh(
 
 def bake_pie(
     data_dict: Dict[str, Union[int, float]],
-    title: str = "",
     radius: float = 1.0,
     height: float = 0.3,
-    font_size: int = 36,
+    font_size: int = 42,
     label_with_percent: bool = False,
     small_slice_labels_outside: bool = False,
     projection_type: str = "orthographic",
@@ -285,8 +282,8 @@ def bake_pie(
                 annotation_x = radius * 0.7 * np.cos((start_angle + end_angle) / 2)
                 annotation_y = radius * 0.7 * np.sin((start_angle + end_angle) / 2)
             else:
-                annotation_x = radius * 0.35 * np.cos((start_angle + end_angle) / 2)
-                annotation_y = radius * 0.35 * np.sin((start_angle + end_angle) / 2)
+                annotation_x = radius * 0.4 * np.cos((start_angle + end_angle) / 2)
+                annotation_y = radius * 0.4 * np.sin((start_angle + end_angle) / 2)
         font = dict(size=font_size, color="white")
         if end_angle - start_angle < np.pi / 10:
             angle_size = (end_angle - start_angle)
