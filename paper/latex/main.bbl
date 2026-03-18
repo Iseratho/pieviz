@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+
+\bibitem{bossard14}
+{\sc Bossard, L., Guillaumin, M., and Van~Gool, L.}
+\newblock Food-101 -- mining discriminative components with random forests.
+\newblock In {\em European Conference on Computer Vision\/} (2014).
+
+\bibitem{hofstadter1999godel}
+{\sc Hofstadter, D.~R.}
+\newblock {\em G{\"o}del, Escher, Bach: an eternal golden braid}.
+\newblock Basic books, 1999.
+
+\bibitem{lex2014upset}
+{\sc Lex, A., Gehlenborg, N., Strobelt, H., Vuillemot, R., and Pfister, H.}
+\newblock Upset: visualization of intersecting sets.
+\newblock {\em IEEE transactions on visualization and computer graphics 20}, 12 (2014), 1983--1992.
+
+\end{thebibliography}
